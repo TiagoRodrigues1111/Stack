@@ -1,0 +1,4 @@
+# ignore local todo.txt file
+todo.txt
+.vscode
+*.exe
