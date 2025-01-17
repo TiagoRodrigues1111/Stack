@@ -1,8 +1,8 @@
 
 /*******************************************************************************************************
-* NAME:                                                                     
+* NAME: stack.h                                                                    
 *                                                                                                       
-* PURPOSE:                                                                      
+* PURPOSE: This file defines the function prototypes for a stack implementation                                                                       
 *                                                                                                       
 * GLOBAL VARIABLES: None                                                                                
 *                                                                                                       
@@ -19,16 +19,15 @@
 #define STACK_H
 
 /* 0 copyright/licensing */
-/**********************************************************************
+/*******************************************************************************************************
 *
 * 2025 Tiago Filipe Rodrigues tiagorodrigues1590@hotmail.com
 *
-***********************************************************************/
+********************************************************************************************************/
 
 #ifdef __cplusplus
 extern "C" {
 #endif
-
 
 
 /* 1 includes */
@@ -65,7 +64,7 @@ extern "C" {
 
 /******************************************************************
 *
-* FUNCTION NAME:        
+* FUNCTION NAME: create_stack       
 *
 *
 *
@@ -75,7 +74,7 @@ extern "C" {
 * --------	-------------	---	--------------------------
 * 
 *
-* RETURNS:
+* RETURNS: void
 *
 *
 *
@@ -86,7 +85,7 @@ void create_stack();
 
 /******************************************************************
 *
-* FUNCTION NAME:        
+* FUNCTION NAME: check_stack_top       
 *
 *
 *
@@ -96,7 +95,7 @@ void create_stack();
 * --------	-------------	---	--------------------------
 * 
 *
-* RETURNS:
+* RETURNS: void*
 *
 *
 *
@@ -105,7 +104,7 @@ void* check_stack_top();
 
 /******************************************************************
 *
-* FUNCTION NAME:        
+* FUNCTION NAME: stack_pop       
 *
 *
 *
@@ -115,7 +114,7 @@ void* check_stack_top();
 * --------	-------------	---	--------------------------
 * 
 *
-* RETURNS:
+* RETURNS: void
 *
 *
 *
@@ -125,7 +124,7 @@ void stack_pop();
 
 /******************************************************************
 *
-* FUNCTION NAME:        
+* FUNCTION NAME: stack_push        
 *
 *
 *
@@ -135,7 +134,7 @@ void stack_pop();
 * --------	-------------	---	--------------------------
 * 
 *
-* RETURNS:
+* RETURNS: void
 *
 *
 *
@@ -145,7 +144,7 @@ void stack_push(void* data_to_push);
 
 /******************************************************************
 *
-* FUNCTION NAME:        
+* FUNCTION NAME: check_stack_is_empty
 *
 *
 *
@@ -155,7 +154,7 @@ void stack_push(void* data_to_push);
 * --------	-------------	---	--------------------------
 * 
 *
-* RETURNS:
+* RETURNS: uint8_t, as 0 or 1 
 *
 *
 *
@@ -166,7 +165,7 @@ uint8_t check_stack_is_empty();
 
 /******************************************************************
 *
-* FUNCTION NAME:        
+* FUNCTION NAME: check_stack_size
 *
 *
 *
@@ -176,7 +175,7 @@ uint8_t check_stack_is_empty();
 * --------	-------------	---	--------------------------
 * 
 *
-* RETURNS:
+* RETURNS: uint64_t, size of the stack
 *
 *
 *
@@ -187,7 +186,7 @@ uint64_t check_stack_size();
 
 /******************************************************************
 *
-* FUNCTION NAME:        
+* FUNCTION NAME: free_stack
 *
 *
 *
@@ -197,7 +196,7 @@ uint64_t check_stack_size();
 * --------	-------------	---	--------------------------
 * 
 *
-* RETURNS:
+* RETURNS: void
 *
 *
 *
