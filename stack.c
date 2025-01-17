@@ -85,7 +85,7 @@
 
 /* 4 typedefs */
 /*****************************************************/
-typedef uint8_t stack_datatype;
+// typedef uint8_t stack_datatype;
 
 /*****************************************************/
 
@@ -94,14 +94,15 @@ typedef uint8_t stack_datatype;
 /*****************************************************/
 void *stack = NULL;
 uint64_t stack_size = 0;
-uint64_t stack_size_allocated = 0;                    // num_of_bytes
+uint64_t stack_size_allocated = 0;                      // num_of_bytes
+uint64_t datatype_size = 0;                             // num_of_bytes
 
 /*****************************************************/
 
 
 /* 6 function prototypes */
 /*****************************************************/
-void datatype_definition(uint64_t bytes);
+// void datatype_definition(uint64_t bytes);
 
 /*****************************************************/
 
@@ -154,6 +155,7 @@ void create_stack(uint64_t size_of_datatype)           // send the size of value
         stack_size_allocated = size_of_datatype*2;                      //allocate 2 elements
         stack = (void*) malloc(stack_size_allocated);
         stack_size = 0;
+        datatype_size = size_of_datatype;
         return ;        
 }
 
@@ -182,10 +184,8 @@ void* check_stack_top()
         if(stack_size == 0)                       
                 return NULL;
 
-        return (void *) &((stack_datatype *)stack)[stack_size-1];
-
+        return (void *) &((uint8_t*)stack)[(stack_size-1)*datatype_size];
 }
-
 
 
 
@@ -239,7 +239,7 @@ void stack_push(void* data_to_push)
 {
 
         stack_size++;
-        if(stack_size >= (stack_size_allocated / sizeof(stack_datatype)))
+        if(stack_size >= (stack_size_allocated / datatype_size))
         {
                 void* stack_aux = realloc(stack,stack_size_allocated + stack_size_allocated);            // increments by 10;
                 stack_size_allocated <<= 1; 
@@ -248,9 +248,10 @@ void stack_push(void* data_to_push)
                         fprintf(stderr, "Memory allocation failed\n");
                 }
                 stack = stack_aux;
-
         }
-        ((stack_datatype*)stack)[stack_size-1] = *((stack_datatype*) data_to_push);
+
+        void* pointer_aux = (void *) &((uint8_t*)stack)[(stack_size-1)*datatype_size];
+        pointer_aux =  *(uint8_t*) data_to_push;
 
 
         return;
