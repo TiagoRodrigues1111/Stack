@@ -8,7 +8,7 @@ int main()
 {
         uint8_t data_test = 3;       
         
-        create_stack();
+        create_stack(sizeof(uint8_t));
         
         printf("%u\n",check_stack_is_empty());
 

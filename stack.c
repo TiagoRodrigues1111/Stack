@@ -94,7 +94,7 @@ typedef uint8_t stack_datatype;
 /*****************************************************/
 void *stack = NULL;
 uint64_t stack_size = 0;
-uint64_t stack_size_allocated = 2;                    // num_of_bytes
+uint64_t stack_size_allocated = 0;                    // num_of_bytes
 
 /*****************************************************/
 
@@ -149,10 +149,10 @@ void datatype_definition(uint64_t bytes)
 *
 *
 *****************************************************************/
-void create_stack()                     // send the size of values;
+void create_stack(uint64_t size_of_datatype)           // send the size of values;
 {
-        
-        stack = (void*) malloc(stack_size_allocated*1);
+        stack_size_allocated = size_of_datatype*2;                      //allocate 2 elements
+        stack = (void*) malloc(stack_size_allocated);
         stack_size = 0;
         return ;        
 }
