@@ -85,23 +85,22 @@
 
 /* 4 typedefs */
 /*****************************************************/
-typedef uint8_t stack_datatype;
+typedef uint16_t stack_datatype;
 
 /*****************************************************/
 
 
 /* 5 global variable declarations */
 /*****************************************************/
-void *stack = NULL;
+stack_datatype *stack = NULL;
 uint64_t stack_size = 0;
-uint64_t stack_size_allocated = 0;                    // num_of_bytes
+uint64_t stack_size_allocated = 0;                      //elements   
 
 /*****************************************************/
 
 
 /* 6 function prototypes */
 /*****************************************************/
-void datatype_definition(uint64_t bytes);
 
 /*****************************************************/
 
@@ -109,28 +108,6 @@ void datatype_definition(uint64_t bytes);
 
 /* 7 function declarations */
 /*****************************************************/
-
-/*
-void datatype_definition(uint64_t bytes)
-{
-        switch (bytes)
-        {
-        case 1:
-                
-                typedef uint8_t stack_datatype;
-                break;
-        case 2:
-                typedef uint16_t stack_datatype;
-                break;
-        
-        default:
-                break;
-        }
-
-
-}
-*/
-
 
 /******************************************************************
 *
@@ -149,10 +126,10 @@ void datatype_definition(uint64_t bytes)
 *
 *
 *****************************************************************/
-void create_stack(uint64_t size_of_datatype)           // send the size of values;
+void create_stack()           // send the size of values;
 {
-        stack_size_allocated = size_of_datatype*2;                      //allocate 2 elements
-        stack = (void*) malloc(stack_size_allocated);
+        stack_size_allocated = 10;                      //allocate 2 elements
+        stack = (stack_datatype*) malloc(10*sizeof(stack_datatype));
         stack_size = 0;
         return ;        
 }
@@ -239,7 +216,7 @@ void stack_push(void* data_to_push)
 {
 
         stack_size++;
-        if(stack_size >= (stack_size_allocated / sizeof(stack_datatype)))
+        if(stack_size >= stack_size_allocated)
         {
                 void* stack_aux = realloc(stack,stack_size_allocated + stack_size_allocated);            // increments by 10;
                 stack_size_allocated <<= 1; 
@@ -250,13 +227,9 @@ void stack_push(void* data_to_push)
                 stack = stack_aux;
 
         }
-        ((stack_datatype*)stack)[stack_size-1] = *((stack_datatype*) data_to_push);
-
-
+        stack[stack_size-1] = *((stack_datatype*) data_to_push);
         return;
 }
-
-
 
 
 
