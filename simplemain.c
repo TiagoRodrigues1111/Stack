@@ -32,7 +32,7 @@ void single_stack_simple_test()
         printf("%u\n", *((uint16_t*)check_stack_top(stack1)));
 
 
-        printf("%u\n",check_stack_size(stack1));
+        printf("%lu\n",check_stack_size(stack1));
 
         free_stack(stack1);
 
@@ -74,7 +74,7 @@ void two_stacks_simple_test()
         printf("%u\n", *((uint16_t*)check_stack_top(stack2)));
 
 
-        printf("%u\n",check_stack_size(stack1));
+        printf("%lu\n",check_stack_size(stack1));
 
         free_stack(stack1);
 
