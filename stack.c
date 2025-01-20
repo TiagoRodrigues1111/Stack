@@ -67,6 +67,7 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 
 /*****************************************************/
 
@@ -94,12 +95,11 @@
 
 /* 5 global variable declarations */
 /*****************************************************/
-stack_datatype *stack = NULL;
+void *stack = NULL;
 uint64_t stack_size = 0;
 
 uint64_t stack_size_allocated = 0;                      // num_of_bytes
 uint64_t datatype_size = 0;                             // num_of_bytes
-=======
 
 
 /*****************************************************/
@@ -135,10 +135,10 @@ uint64_t datatype_size = 0;                             // num_of_bytes
 *
 *
 *****************************************************************/
-void create_stack()           // send the size of values;
+void create_stack(uint64_t size_of_datatype)           // send the size of values;
 {
-        stack_size_allocated = 10;                      //allocate 2 elements
-        stack = (stack_datatype*) malloc(10*sizeof(stack_datatype));
+        stack_size_allocated = 10;                      //allocate 10 elements
+        stack = (void*) malloc(10*size_of_datatype);
         stack_size = 0;
         datatype_size = size_of_datatype;
         return ;        
@@ -169,7 +169,7 @@ void* check_stack_top()
         if(stack_size == 0)                       
                 return NULL;
 
-        return (void *) &((uint8_t*)stack)[(stack_size-1)*datatype_size];
+        return (void *) &((uint8_t*)stack)[(stack_size-1)*datatype_size];               //increment the right amount of bytes, then convert back to void
 }
 
 
@@ -236,9 +236,7 @@ void stack_push(void* data_to_push)
                 stack = stack_aux;
         }
 
-        void* pointer_aux = (void *) &((uint8_t*)stack)[(stack_size-1)*datatype_size];
-        pointer_aux =  *(uint8_t*) data_to_push;
-
+        memcpy((void *) &((uint8_t*)stack)[(stack_size-1)*datatype_size], data_to_push, datatype_size);
 
         return;
 }
@@ -293,7 +291,6 @@ uint8_t check_stack_is_empty()
 uint64_t check_stack_size()
 {
         return stack_size;
-
 }
 
 
