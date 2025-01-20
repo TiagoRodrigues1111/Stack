@@ -79,7 +79,7 @@ extern "C" {
 *
 *
 *****************************************************************/
-void create_stack(uint64_t size_of_datatype);           // send the size of values;
+void create_stack();           // send the size of values;
 
 
 
