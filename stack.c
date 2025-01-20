@@ -253,7 +253,7 @@ void stack_push(void* id_of_stack, void* data_to_push)
 
         if(((struct stack*)id_of_stack)->stack_size > ((struct stack*)id_of_stack)->stack_size_allocated)
         {
-                printf("hello! \n");
+                // printf("hello! \n");
                 void* stack_aux = realloc(((struct stack*)id_of_stack)->stack_data, (((struct stack*)id_of_stack)->stack_size_allocated + ((struct stack*)id_of_stack)->stack_size_allocated)*((struct stack*)id_of_stack)->datatype_size);            // increments by 10;
                 ((struct stack*)id_of_stack)->stack_size_allocated <<= 1; 
                 if(stack_aux == NULL)
