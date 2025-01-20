@@ -79,7 +79,7 @@ extern "C" {
 *
 *
 *****************************************************************/
-void create_stack(uint64_t size_of_datatype);           // send the size of values;
+void create_stack(void** id_of_stack, uint64_t size_of_datatype);           // send the size of values;
 
 
 
@@ -100,7 +100,7 @@ void create_stack(uint64_t size_of_datatype);           // send the size of valu
 *
 *
 *****************************************************************/
-void* check_stack_top();
+void* check_stack_top(void* id_of_stack);
 
 /******************************************************************
 *
@@ -119,7 +119,7 @@ void* check_stack_top();
 *
 *
 *****************************************************************/
-void stack_pop();
+void stack_pop(void* id_of_stack);
 
 
 /******************************************************************
@@ -139,7 +139,7 @@ void stack_pop();
 *
 *
 *****************************************************************/
-void stack_push(void* data_to_push);
+void stack_push(void* id_of_stack, void* data_to_push);
 
 
 /******************************************************************
@@ -159,7 +159,7 @@ void stack_push(void* data_to_push);
 *
 *
 *****************************************************************/
-uint8_t check_stack_is_empty();
+uint8_t check_stack_is_empty(void* id_of_stack);
 
 
 
@@ -180,7 +180,7 @@ uint8_t check_stack_is_empty();
 *
 *
 *****************************************************************/
-uint64_t check_stack_size();
+uint64_t check_stack_size(void* id_of_stack);
 
 
 
@@ -201,7 +201,7 @@ uint64_t check_stack_size();
 *
 *
 *****************************************************************/
-void free_stack();
+void free_stack(void* id_of_stack);
 
 
 
