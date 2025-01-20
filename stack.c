@@ -91,16 +91,27 @@
 // typedef uint8_t stack_datatype;
 
 
+
+
+
 /*****************************************************/
 
 
 /* 5 global variable declarations */
 /*****************************************************/
-void *stack = NULL;
-uint64_t stack_size = 0;
+//void *stack = NULL;
+//uint64_t stack_size = 0;
 
-uint64_t stack_size_allocated = 0;                      // num_of_bytes
-uint64_t datatype_size = 0;                             // num_of_bytes
+// uint64_t stack_size_allocated = 0;                      // num_of_bytes
+// uint64_t datatype_size = 0;                             // num_of_bytes
+
+struct stack
+{
+        uint64_t stack_size;
+        uint64_t stack_size_allocated;                  // num_of_elements
+        uint64_t datatype_size;                         // num_of_bytes
+        void *stack_data;
+};
 
 
 /*****************************************************/
@@ -109,7 +120,6 @@ uint64_t datatype_size = 0;                             // num_of_bytes
 /* 6 function prototypes */
 /*****************************************************/
 
-// void datatype_definition(uint64_t bytes);
 
 
 /*****************************************************/
@@ -136,12 +146,28 @@ uint64_t datatype_size = 0;                             // num_of_bytes
 *
 *
 *****************************************************************/
-void create_stack(uint64_t size_of_datatype)           // send the size of values;
+void create_stack(void** id_of_stack, uint64_t size_of_datatype)                 
 {
-        stack_size_allocated = 3;                      //allocate 10 elements
-        stack = (void*) malloc(stack_size_allocated*size_of_datatype);
-        stack_size = 0;
-        datatype_size = size_of_datatype;
+
+        (*id_of_stack) = malloc(1*sizeof(struct stack));
+        if(*id_of_stack == NULL)
+        {
+                fprintf(stderr, "Memory allocation failed\n");
+        }
+
+
+        ((struct stack*)(*id_of_stack))->stack_size_allocated = 3;
+        ((struct stack*)(*id_of_stack))->stack_size = 0;
+        ((struct stack*)(*id_of_stack))->datatype_size = size_of_datatype;
+        
+        ((struct stack*)(*id_of_stack))->stack_data = (void*) malloc(((struct stack*)(*id_of_stack))->stack_size_allocated*((struct stack*)(*id_of_stack))->datatype_size);
+        if(((struct stack*)(*id_of_stack))->stack_data == NULL)
+        {
+                fprintf(stderr, "Memory allocation failed\n");
+        }
+        
+
+        
         return ;        
 }
 
@@ -165,14 +191,14 @@ void create_stack(uint64_t size_of_datatype)           // send the size of value
 *
 *
 *****************************************************************/
-void* check_stack_top()
+void* check_stack_top(void* id_of_stack)
 {
-        if(stack_size == 0)                       
+
+        if(((struct stack*)id_of_stack)->stack_size == 0)                       
                 return NULL;
 
-        return (void *) &((uint8_t*)stack)[(stack_size-1)*datatype_size];               //increment the right amount of bytes, then convert back to void
+        return (void *) &((uint8_t*)(((struct stack*)id_of_stack)->stack_data))[(((struct stack*)id_of_stack)->stack_size-1)*((struct stack*)id_of_stack)->datatype_size];               //increment the right amount of bytes, then convert back to void
 }
-
 
 
 
@@ -193,11 +219,10 @@ void* check_stack_top()
 *
 *
 *****************************************************************/
-void stack_pop()
+void stack_pop(void* id_of_stack)
 {
-                        // delete the data? for security?
-        if(stack_size > 0)
-                stack_size--;
+        if(((struct stack*)id_of_stack)->stack_size > 0)
+                ((struct stack*)id_of_stack)->stack_size--;
         return;
 }
 
@@ -221,26 +246,26 @@ void stack_pop()
 *
 *
 *****************************************************************/
-void stack_push(void* data_to_push)
+void stack_push(void* id_of_stack, void* data_to_push)
 {
 
-        stack_size++;
+        ((struct stack*)id_of_stack)->stack_size++;
 
-        if(stack_size > (stack_size_allocated))
+        if(((struct stack*)id_of_stack)->stack_size > ((struct stack*)id_of_stack)->stack_size_allocated)
         {
                 printf("hello! \n");
-                void* stack_aux = realloc(stack, (stack_size_allocated + stack_size_allocated)*datatype_size);            // increments by 10;
-                stack_size_allocated <<= 1; 
+                void* stack_aux = realloc(((struct stack*)id_of_stack)->stack_data, (((struct stack*)id_of_stack)->stack_size_allocated + ((struct stack*)id_of_stack)->stack_size_allocated)*((struct stack*)id_of_stack)->datatype_size);            // increments by 10;
+                ((struct stack*)id_of_stack)->stack_size_allocated <<= 1; 
                 if(stack_aux == NULL)
                 {
                         fprintf(stderr, "Memory allocation failed\n");
                 }
-                stack = stack_aux;
+                ((struct stack*)id_of_stack)->stack_data = stack_aux;
         }
 
-        memcpy((void *) &((uint8_t*)stack)[(stack_size-1)*datatype_size], data_to_push, datatype_size);
+        memcpy((void *) &((uint8_t*)(((struct stack*)id_of_stack)->stack_data))[((((struct stack*)id_of_stack)->stack_size)-1)*(((struct stack*)id_of_stack)->datatype_size)], data_to_push, ((struct stack*)id_of_stack)->datatype_size);
 
-        return;
+        return ;
 }
 
 
@@ -264,9 +289,10 @@ void stack_push(void* data_to_push)
 *
 *
 *****************************************************************/
-uint8_t check_stack_is_empty()
+uint8_t check_stack_is_empty(void* id_of_stack)
 {
-        if(stack_size == 0)
+
+        if(((struct stack*)id_of_stack)->stack_size == 0)
                 return 1;
         else
                 return 0;
@@ -290,9 +316,9 @@ uint8_t check_stack_is_empty()
 *
 *
 *****************************************************************/
-uint64_t check_stack_size()
+uint64_t check_stack_size(void* id_of_stack)
 {
-        return stack_size;
+        return ((struct stack*)id_of_stack)->stack_size;
 }
 
 
@@ -313,8 +339,9 @@ uint64_t check_stack_size()
 *
 *
 *****************************************************************/
-void free_stack()
+void free_stack(void* id_of_stack)
 {
-        free(stack);
+        free(((struct stack*)id_of_stack)->stack_data);
+        free(id_of_stack);
         return ;
 }
