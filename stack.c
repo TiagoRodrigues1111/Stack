@@ -44,6 +44,7 @@
 * ----------    ---------------         ---------       -------         ---------------------   
 * 14-01-2025    Tiago Rodrigues                               1         File preparation     
 * 17-01-2025    Tiago Rodrigues                               1         Initial Implementation of stack, for uint8_t   
+* 20-01-2025    Tiago Rodrigues                               1         Changed operations to use memcpy   
 *                                                                                                               
 * ALGORITHM (PDL)
 *    
@@ -137,8 +138,8 @@ uint64_t datatype_size = 0;                             // num_of_bytes
 *****************************************************************/
 void create_stack(uint64_t size_of_datatype)           // send the size of values;
 {
-        stack_size_allocated = 10;                      //allocate 10 elements
-        stack = (void*) malloc(10*size_of_datatype);
+        stack_size_allocated = 3;                      //allocate 10 elements
+        stack = (void*) malloc(stack_size_allocated*size_of_datatype);
         stack_size = 0;
         datatype_size = size_of_datatype;
         return ;        
@@ -225,9 +226,10 @@ void stack_push(void* data_to_push)
 
         stack_size++;
 
-        if(stack_size >= (stack_size_allocated / datatype_size))
+        if(stack_size > (stack_size_allocated))
         {
-                void* stack_aux = realloc(stack,stack_size_allocated + stack_size_allocated);            // increments by 10;
+                printf("hello! \n");
+                void* stack_aux = realloc(stack, (stack_size_allocated + stack_size_allocated)*datatype_size);            // increments by 10;
                 stack_size_allocated <<= 1; 
                 if(stack_aux == NULL)
                 {
