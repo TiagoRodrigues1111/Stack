@@ -12,7 +12,8 @@
 * Date          Author          Change Id       Release         Description Of Change                   
 * ----------    --------------- ---------       -------         -----------------------------------     
 * 14-01-2025    Tiago Rodrigues                       1         File preparation     
-* 14-01-2025    Tiago Rodrigues                       1         Added prototype functions                                                                                                       
+* 14-01-2025    Tiago Rodrigues                       1         Added prototype functions  
+* 21-01-2025    Tiago Rodrigues                       1         Commmented function preambles 
 *                                                                                                       
 *******************************************************************************************************/
 #ifndef STACK_H
@@ -54,7 +55,6 @@ extern "C" {
 /* 5 global variable declarations */
 /*****************************************************/
 
-
 /*****************************************************/
 
 
@@ -70,9 +70,11 @@ extern "C" {
 *
 * ARGUMENTS:
 *
-* ARGUMENT 	TYPE	        I/O	DESCRIPTION
-* --------	-------------	---	--------------------------
-* 
+* ARGUMENT 	        TYPE	        I/O	DESCRIPTION
+* --------              ----            ---     ------------
+* id_of_stack	        void**	        I/O	pointer to the memory position of the stack to implement
+* size_of_datatype      uint64_t        I       byte size of datatype to place in the stack
+*
 *
 * RETURNS: void
 *
@@ -92,10 +94,11 @@ void create_stack(void** id_of_stack, uint64_t size_of_datatype);           // s
 * ARGUMENTS:
 *
 * ARGUMENT 	TYPE	        I/O	DESCRIPTION
-* --------	-------------	---	--------------------------
+* --------      ----            ---     ------------
+* id_of_stack   void*	        I	pointer to the memory position of the stack to check
 * 
 *
-* RETURNS: void*
+* RETURNS: void* (pointer to the memory position of the top element of the stack)
 *
 *
 *
@@ -112,7 +115,8 @@ void* check_stack_top(void* id_of_stack);
 *
 * ARGUMENT 	TYPE	        I/O	DESCRIPTION
 * --------	-------------	---	--------------------------
-* 
+* id_of_stack   void*	        I	pointer to the memory position of the stack to pop from
+*
 *
 * RETURNS: void
 *
@@ -132,7 +136,9 @@ void stack_pop(void* id_of_stack);
 *
 * ARGUMENT 	TYPE	        I/O	DESCRIPTION
 * --------	-------------	---	--------------------------
-* 
+* id_of_stack   void*	        I	pointer to the memory position of the stack to push to
+* data_to_push  void*	        I	pointer to the memory position of the data to push into the stack
+*
 *
 * RETURNS: void
 *
@@ -152,9 +158,10 @@ void stack_push(void* id_of_stack, void* data_to_push);
 *
 * ARGUMENT 	TYPE	        I/O	DESCRIPTION
 * --------	-------------	---	--------------------------
-* 
+* id_of_stack   void*	        I	pointer to the memory position of the stack to check
 *
-* RETURNS: uint8_t, as 0 or 1 
+*
+* RETURNS: uint8_t
 *
 *
 *
@@ -173,9 +180,10 @@ uint8_t check_stack_is_empty(void* id_of_stack);
 *
 * ARGUMENT 	TYPE	        I/O	DESCRIPTION
 * --------	-------------	---	--------------------------
-* 
+* id_of_stack   void*	        I	pointer to the memory position of the stack to check
 *
-* RETURNS: uint64_t, size of the stack
+*
+* RETURNS: uint64_t (size of the stack)
 *
 *
 *
@@ -194,7 +202,8 @@ uint64_t check_stack_size(void* id_of_stack);
 *
 * ARGUMENT 	TYPE	        I/O	DESCRIPTION
 * --------	-------------	---	--------------------------
-* 
+* id_of_stack   void*	        I	pointer to the memory position of the stack to free
+*
 *
 * RETURNS: void
 *
@@ -205,36 +214,10 @@ void free_stack(void* id_of_stack);
 
 
 
-
-
 #ifdef __cplusplus
 }
 #endif
 
 
 #endif
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
