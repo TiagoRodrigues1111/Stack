@@ -40,6 +40,26 @@ void single_stack_simple_test()
 }
 
 
+void single_stack_simple_test_2()
+{
+
+        void *stack1 = NULL;
+
+        create_stack(&stack1, sizeof(uint16_t));
+
+
+        uint16_t data_test = 3;
+        stack_push(stack1,(void*) &data_test);
+
+        free_stack(stack1);
+
+        return ;
+}
+
+
+
+
+
 
 void two_stacks_simple_test()
 {
@@ -88,7 +108,8 @@ void two_stacks_simple_test()
 int main()
 {
         single_stack_simple_test();
-
+        
+        //single_stack_simple_test_2();
 
         return 0;  
 }

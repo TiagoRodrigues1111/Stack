@@ -451,17 +451,16 @@ void free_stack(void* id_of_stack)
         if(id_of_stack == NULL)
                 return;
 
-        if(((struct stack*)id_of_stack)->stack_data != NULL)
+        struct data *aux_data_ptr =((struct stack*)id_of_stack)->stack_data; 
+        
+        while((((struct stack*)id_of_stack)->stack_data) != NULL)
         {
-                struct data *aux_data_ptr =((struct stack*)id_of_stack)->stack_data; 
-                while((((struct stack*)id_of_stack)->stack_data) != NULL)
-                {
-                        ((struct stack*)id_of_stack)->stack_data = ((struct stack*)id_of_stack)->stack_data->next;
-                        free(aux_data_ptr);
-                        aux_data_ptr = ((struct stack*)id_of_stack)->stack_data;
-                }
-                
+                ((struct stack*)id_of_stack)->stack_data = ((struct stack*)id_of_stack)->stack_data->next;
+                free(aux_data_ptr->data_element);
+                free(aux_data_ptr);
+                aux_data_ptr = ((struct stack*)id_of_stack)->stack_data;
         }
+                
         free(id_of_stack);
         return ;
 }

@@ -3,3 +3,6 @@ todo.txt
 .vscode
 *.exe
 *.out
+
+# Ignore all
+*
