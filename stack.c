@@ -317,7 +317,7 @@ void stack_push(void* id_of_stack, void* data_to_push)
                 ((struct stack*)id_of_stack)->stack_size_allocated <<= 1;
         }
 
-        memcpy((void *) &((uint8_t*)(((struct stack*)id_of_stack)->stack_data))[((((struct stack*)id_of_stack)->stack_size)-1)*(((struct stack*)id_of_stack)->datatype_size)], data_to_push, ((struct stack*)id_of_stack)->datatype_size);
+        memcpy(check_stack_top(id_of_stack), data_to_push, ((struct stack*)id_of_stack)->datatype_size);
 
         return ;
 }
