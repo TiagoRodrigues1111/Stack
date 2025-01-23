@@ -41,8 +41,10 @@
 * Date          Author                  Change Id       Release         Description Of Change                   
 * ----------    ---------------         ---------       -------         ---------------------   
 * 21-01-2025    Tiago Rodrigues                               1         Copy of stack.c, followed by changing the 
-                                                                         datatypes and functions to implement the 
-                                                                         stack data as a linked list      
+* ----------    ---------------         ---------       -------          datatypes and functions to implement the 
+* ----------    ---------------         ---------       -------          stack data as a linked list      
+* 23-01-2025    Tiago Rodrigues                               1         Updated create_stack function, and added 
+* ----------    ---------------         ---------       -------          a few good C practices
 *                                                                                                               
 * ALGORITHM (PDL)
 *    
@@ -145,20 +147,24 @@ struct stack
 * --------              ----            ---     ------------
 * id_of_stack	        void**	        I/O	pointer to the memory position of the stack to implement
 * size_of_datatype      uint64_t        I       byte size of datatype to place in the stack
+* elements_to_allocate  uint64_t        I       number of elements to allocate
+*
+* NOTES: elements_to_allocate is not needed here, since linked lists are allocated node by node. Its present
+*         here to mantain compatibility to stack.h
 *
 *
 * RETURNS: void
 *
 *
 *****************************************************************/
-void create_stack(void** id_of_stack, uint64_t size_of_datatype)
+void create_stack(void** id_of_stack, uint64_t size_of_datatype,uint64_t elements_to_allocate)
 {
         /* LOCAL VARIABLES:
         *  Variable        Type    Description
         *  --------        ----    -----------
         *  None
         */
-        if(id_of_stack == NULL)
+        if(NULL == id_of_stack)
         {
                 fprintf(stderr, "Stack pointer location is null\n");
                 return ;
@@ -167,7 +173,7 @@ void create_stack(void** id_of_stack, uint64_t size_of_datatype)
 
         // Allocation of a stack struct
         (*id_of_stack) = malloc(1*sizeof(struct stack));                       
-        if(*id_of_stack == NULL)
+        if(NULL == *id_of_stack)
         {
                 fprintf(stderr, "Memory allocation failed\n");
         }
@@ -224,7 +230,7 @@ void* check_stack_top(void* id_of_stack)
         *  --------        ----    -----------
         *  None
         */
-        if(id_of_stack == NULL)
+        if(NULL == id_of_stack)
         {
                 fprintf(stderr, "Stack pointer location is null\n");
                 return NULL;
@@ -266,7 +272,7 @@ void stack_pop(void* id_of_stack)
         *  --------     ----            -----------
         *  aux_ptr      struct data*    auxiliary pointer to deallocation of node
         */
-        if(id_of_stack == NULL)
+        if(NULL == id_of_stack)
         {
                 fprintf(stderr, "Stack pointer location is null\n");
                 return ;
@@ -316,7 +322,7 @@ void stack_push(void* id_of_stack, void* data_to_push)
         *  --------     ----            -----------
         *  aux_data_ptr struct data     auxiliary pointer for the allocation of nodes
         */
-        if(id_of_stack == NULL)
+        if(NULL == id_of_stack)
         {
                 fprintf(stderr, "Stack pointer location is null\n");
                 return ;
@@ -327,14 +333,14 @@ void stack_push(void* id_of_stack, void* data_to_push)
 
         // Allocate space in the stack for the array of values
         struct data *aux_data_ptr = (struct data*) malloc(1*sizeof(struct data));   
-        if(aux_data_ptr == NULL)
+        if(NULL == aux_data_ptr)
         {
                 fprintf(stderr, "Memory allocation failed\n");
         }
 
         
         aux_data_ptr->data_element = (void*) malloc(1*((struct stack*)id_of_stack)->datatype_size);
-        if(aux_data_ptr->data_element == NULL)
+        if(NULL == aux_data_ptr->data_element)
         {
                 fprintf(stderr, "Memory allocation failed\n");
         }
@@ -376,13 +382,13 @@ uint8_t check_stack_is_empty(void* id_of_stack)
         *  --------        ----    -----------
         *  None
         */
-        if(id_of_stack == NULL)
+        if(NULL == id_of_stack)
         {
                 fprintf(stderr, "Stack pointer location is null\n");
                 return 0;
         }
                 
-        if(((struct stack*)id_of_stack)->stack_size == 0)
+        if(0 == ((struct stack*)id_of_stack)->stack_size)
                 return 1;
         else
                 return 0;
@@ -414,7 +420,7 @@ uint64_t check_stack_size(void* id_of_stack)
         *  --------        ----    -----------
         *  None
         */
-        if(id_of_stack == NULL)
+        if(NULL == id_of_stack)
         {
                 fprintf(stderr, "Stack pointer location is null\n");
                 return 0;
@@ -448,7 +454,7 @@ void free_stack(void* id_of_stack)
         *  Variable        Type         Description
         *  aux_data_ptr    struct data* auxiliary pointer to deallocation of nodes
         */
-        if(id_of_stack == NULL)
+        if(NULL == id_of_stack)
                 return;
 
         struct data *aux_data_ptr =((struct stack*)id_of_stack)->stack_data; 

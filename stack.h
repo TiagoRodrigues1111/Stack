@@ -14,7 +14,9 @@
 * 14-01-2025    Tiago Rodrigues                       1         File preparation     
 * 14-01-2025    Tiago Rodrigues                       1         Added prototype functions  
 * 21-01-2025    Tiago Rodrigues                       1         Commmented function preambles 
-*                                                                                                       
+* 23-01-2025    Tiago Rodrigues                       1         Changed create stack to allow for number of 
+* ----------    --------------- ---------       -------          elements to be sent for allocation
+*                                                                                                      
 *******************************************************************************************************/
 #ifndef STACK_H
 #define STACK_H
@@ -74,14 +76,14 @@ extern "C" {
 * --------              ----            ---     ------------
 * id_of_stack	        void**	        I/O	pointer to the memory position of the stack to implement
 * size_of_datatype      uint64_t        I       byte size of datatype to place in the stack
-*
+* elements_to_allocate  uint64_t        I       number of elements to allocate for the stack
 *
 * RETURNS: void
 *
 *
 *
 *****************************************************************/
-void create_stack(void** id_of_stack, uint64_t size_of_datatype);           // send the size of values;
+void create_stack(void** id_of_stack, uint64_t size_of_datatype, uint64_t elements_to_allocate);           // send the size of values;
 
 
 

@@ -9,7 +9,7 @@ void single_stack_simple_test()
 
         void *stack1 = NULL;
 
-        create_stack(&stack1, sizeof(uint16_t));
+        create_stack(&stack1, sizeof(uint16_t),0);
         printf("%u\n",check_stack_is_empty(stack1));
 
 
@@ -45,7 +45,7 @@ void single_stack_simple_test_2()
 
         void *stack1 = NULL;
 
-        create_stack(&stack1, sizeof(uint16_t));
+        create_stack(&stack1, sizeof(uint16_t),0);
 
 
         uint16_t data_test = 3;
@@ -68,8 +68,8 @@ void two_stacks_simple_test()
         void *stack2 = NULL;
 
 
-        create_stack(&stack1, sizeof(uint16_t));
-        create_stack(&stack2, sizeof(uint16_t));
+        create_stack(&stack1, sizeof(uint16_t),0);
+        create_stack(&stack2, sizeof(uint16_t),0);
 
 
         printf("%u\n",check_stack_is_empty(stack1));

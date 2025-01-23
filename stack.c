@@ -46,7 +46,9 @@
 * 17-01-2025    Tiago Rodrigues                               1         Initial Implementation of stack, for uint8_t   
 * 20-01-2025    Tiago Rodrigues                               1         Changed operations to use memcpy   
 * 21-01-2025    Tiago Rodrigues                               1         Changed some operations for edge cases, 
-* ----------    ---------------         ---------       -------          and commmented function preambles   
+* ----------    ---------------         ---------       -------          and commmented function preambles
+* 23-01-2025    Tiago Rodrigues                               1         Updated create_stack function, and added 
+* ----------    ---------------         ---------       -------          a few good C practices
 *                                                                                                               
 * ALGORITHM (PDL)
 *    
@@ -144,20 +146,20 @@ struct stack
 * --------              ----            ---     ------------
 * id_of_stack	        void**	        I/O	pointer to the memory position of the stack to implement
 * size_of_datatype      uint64_t        I       byte size of datatype to place in the stack
-*
+* elements_to_allocate  uint64_t        I       number of elements to allocate for the stack
 *
 * RETURNS: void
 *
 *
 *****************************************************************/
-void create_stack(void** id_of_stack, uint64_t size_of_datatype)                 
+void create_stack(void** id_of_stack, uint64_t size_of_datatype, uint64_t elements_to_allocate)                 
 {
         /* LOCAL VARIABLES:
         *  Variable        Type    Description
         *  --------        ----    -----------
         *  None
         */
-        if(id_of_stack == NULL)
+        if(NULL == id_of_stack)
         {
                 fprintf(stderr, "Stack pointer location is null\n");
                 return ;
@@ -166,19 +168,22 @@ void create_stack(void** id_of_stack, uint64_t size_of_datatype)
 
         // Allocation of a stack struct
         (*id_of_stack) = malloc(1*sizeof(struct stack));                       
-        if(*id_of_stack == NULL)
+        if(NULL == *id_of_stack)
         {
                 fprintf(stderr, "Memory allocation failed\n");
         }
 
+        if(0 == elements_to_allocate)
+                ((struct stack*)(*id_of_stack))->stack_size_allocated = INITIAL_ALLOC;      // assumed that the number of elements to allocate initially is INITIAL_ALLOC (3 by default)
+        else
+                ((struct stack*)(*id_of_stack))->stack_size_allocated = elements_to_allocate;
 
-        ((struct stack*)(*id_of_stack))->stack_size_allocated = INITIAL_ALLOC;      // assumed that the number of elements to allocate initially is INITIAL_ALLOC (3 by default)
         ((struct stack*)(*id_of_stack))->stack_size = 0;
         ((struct stack*)(*id_of_stack))->datatype_size = size_of_datatype;
         
         // Allocate space in the stack for the array of values
         ((struct stack*)(*id_of_stack))->stack_data = (void*) malloc(((struct stack*)(*id_of_stack))->stack_size_allocated*((struct stack*)(*id_of_stack))->datatype_size);     
-        if(((struct stack*)(*id_of_stack))->stack_data == NULL)
+        if(NULL == ((struct stack*)(*id_of_stack))->stack_data)
         {
                 fprintf(stderr, "Memory allocation failed\n");
         }
@@ -216,7 +221,7 @@ void* check_stack_top(void* id_of_stack)
         *  --------        ----    -----------
         *  None
         */
-        if(id_of_stack == NULL)
+        if(NULL == id_of_stack)
         {
                 fprintf(stderr, "Stack pointer location is null\n");
                 return NULL;
@@ -258,7 +263,7 @@ void stack_pop(void* id_of_stack)
         *  --------        ----    -----------
         *  None
         */
-        if(id_of_stack == NULL)
+        if(NULL == id_of_stack)
         {
                 fprintf(stderr, "Stack pointer location is null\n");
                 return ;
@@ -297,7 +302,7 @@ void stack_push(void* id_of_stack, void* data_to_push)
         *  --------     ----    -----------
         *  stack_aux    void*   auxiliary pointer for the realloc operation
         */
-        if(id_of_stack == NULL)
+        if(NULL == id_of_stack)
         {
                 fprintf(stderr, "Stack pointer location is null\n");
                 return ;
@@ -309,7 +314,7 @@ void stack_push(void* id_of_stack, void* data_to_push)
         {
                 // tries to allocate double the size of the current stack;
                 void* stack_aux = realloc(((struct stack*)id_of_stack)->stack_data, (((struct stack*)id_of_stack)->stack_size_allocated + ((struct stack*)id_of_stack)->stack_size_allocated)*((struct stack*)id_of_stack)->datatype_size); 
-                if(stack_aux == NULL)
+                if(NULL == stack_aux)
                 {
                         fprintf(stderr, "Memory allocation failed\n");
                 }
@@ -351,13 +356,13 @@ uint8_t check_stack_is_empty(void* id_of_stack)
         *  --------        ----    -----------
         *  None
         */
-        if(id_of_stack == NULL)
+        if(NULL == id_of_stack)
         {
                 fprintf(stderr, "Stack pointer location is null\n");
                 return 0;
         }
                 
-        if(((struct stack*)id_of_stack)->stack_size == 0)
+        if(0 == ((struct stack*)id_of_stack)->stack_size)
                 return 1;
         else
                 return 0;
@@ -389,7 +394,7 @@ uint64_t check_stack_size(void* id_of_stack)
         *  --------        ----    -----------
         *  None
         */
-        if(id_of_stack == NULL)
+        if(NULL == id_of_stack)
         {
                 fprintf(stderr, "Stack pointer location is null\n");
                 return 0;
@@ -424,10 +429,10 @@ void free_stack(void* id_of_stack)
         *  --------        ----    -----------
         *  None
         */
-        if(id_of_stack == NULL)
+        if(NULL == id_of_stack)
                 return;
 
-        if(((struct stack*)id_of_stack)->stack_data != NULL)
+        if(NULL != ((struct stack*)id_of_stack)->stack_data)
                 free(((struct stack*)id_of_stack)->stack_data);
         
         free(id_of_stack);
