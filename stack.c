@@ -159,7 +159,7 @@ void create_stack(void** id_of_stack, uint64_t size_of_datatype, uint64_t elemen
         *  --------        ----    -----------
         *  None
         */
-        if(NULL == id_of_stack)
+        if(NULL == id_of_stack)                                                         // TODO: is this actually a problem?
         {
                 fprintf(stderr, "Stack pointer location is null\n");
                 return ;
@@ -171,6 +171,7 @@ void create_stack(void** id_of_stack, uint64_t size_of_datatype, uint64_t elemen
         if(NULL == *id_of_stack)
         {
                 fprintf(stderr, "Memory allocation failed\n");
+                return ;
         }
 
         if(0 == elements_to_allocate)
