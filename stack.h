@@ -86,7 +86,6 @@ extern "C" {
 void create_stack(void** id_of_stack, uint64_t size_of_datatype, uint64_t elements_to_allocate);           // send the size of values;
 
 
-
 /******************************************************************
 *
 * FUNCTION NAME: check_stack_top       
@@ -106,6 +105,7 @@ void create_stack(void** id_of_stack, uint64_t size_of_datatype, uint64_t elemen
 *
 *****************************************************************/
 void* check_stack_top(void* id_of_stack);
+
 
 /******************************************************************
 *
@@ -171,7 +171,6 @@ void stack_push(void* id_of_stack, void* data_to_push);
 uint8_t check_stack_is_empty(void* id_of_stack);
 
 
-
 /******************************************************************
 *
 * FUNCTION NAME: check_stack_size
@@ -191,7 +190,6 @@ uint8_t check_stack_is_empty(void* id_of_stack);
 *
 *****************************************************************/
 uint64_t check_stack_size(void* id_of_stack);
-
 
 
 /******************************************************************
