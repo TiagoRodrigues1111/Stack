@@ -3,6 +3,7 @@
 #include "stack.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 void single_stack_simple_test()
 {
@@ -221,7 +222,56 @@ void stack_stress_test3()
         
 }
 
+/* Random Operations test*/
+void stack_stress_test4()
+{
+        void *stack1=NULL;
+        uint16_t data1=0; 
+        srand(time(NULL));                      
+       
+        create_stack(&stack1,sizeof(uint16_t),100);
 
+        // uint64_t n = 400000000;
+        uint64_t operations = 400000;
+
+        
+        while(0 < operations)
+        {
+                uint8_t op_to_do = rand() % 5;          
+                switch (op_to_do)
+                {
+                case 0:                                         // stack_push
+                        stack_push(stack1, (void*) &data1);
+                        break;
+                case 1:                                         // stack_pop
+                        stack_pop(stack1);
+                        break; 
+                case 2:                                         // check_stack_top
+                       if(NULL != check_stack_top(stack1))
+                        {
+                                printf("stack top: %u\n",*((uint16_t*)check_stack_top(stack1)));
+                        }
+                        break; 
+                case 3:                                         // check_stack_is_empty
+                        printf("stack empty?: %u\n",check_stack_is_empty(stack1));
+                        break; 
+                case 4:                                         // check_stack_size
+                        printf("stack size: %lu\n",check_stack_size(stack1));
+                        break; 
+                default:
+                        break;
+                }
+
+
+
+                data1++;
+                operations--;
+        }
+
+        free_stack(stack1);    
+
+
+}
 
 
 int main()
@@ -230,11 +280,13 @@ int main()
         
         //single_stack_simple_test_2();
 
-        stack_stress_test1();
+        // stack_stress_test1();
         
         // stack_stress_test2();
 
         // stack_stress_test3();
+
+        stack_stress_test4();
 
         return 0;  
 }
