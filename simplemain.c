@@ -202,7 +202,7 @@ void stack_stress_test3()
                 {
                 if(NULL != check_stack_top(stacks[i]))
                 {
-                        printf("%lu ",*((uint16_t*)check_stack_top(stacks[i])));
+                        printf("%u ",*((uint16_t*)check_stack_top(stacks[i])));
                 }
 
                 stack_pop(stacks[i]);
@@ -215,6 +215,7 @@ void stack_stress_test3()
         {
                 free_stack(stacks[i]);
         }        
+        free(stacks);
         
 }
 
@@ -227,10 +228,11 @@ int main()
         
         //single_stack_simple_test_2();
 
-        // stack_stress_test1();
-        //stack_stress_test2();
+        stack_stress_test1();
+        
+        // stack_stress_test2();
 
-        stack_stress_test3();
+        // stack_stress_test3();
 
         return 0;  
 }
