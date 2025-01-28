@@ -237,8 +237,12 @@ void* check_stack_top(void* id_of_stack)
         }
                
 
-        //if(check_stack_is_empty(id_of_stack))                       
-        //        return NULL;
+        if(check_stack_is_empty(id_of_stack))
+        {
+                return NULL;
+        }
+        
+
 
         return (((struct stack*)id_of_stack)->stack_data->data_element);
 }

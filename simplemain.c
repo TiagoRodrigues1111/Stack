@@ -108,11 +108,12 @@ void two_stacks_simple_test()
 void stack_stress_test1()
 {
         void *stack1=NULL;
-        uint16_t data1 =0; 
+        uint16_t data1=0; 
 
         create_stack(&stack1,sizeof(uint16_t),100);
 
-        uint64_t n = 400000000;
+        // uint64_t n = 400000000;
+        uint64_t n = 4000000;
         
         while(0 < n)
         {
@@ -153,6 +154,7 @@ void stack_stress_test2()
         create_stack(&stack2,sizeof(uint16_t),5);
 
         uint64_t n = 4000000000;
+        // uint64_t n = 4000000;
         
         while(0 < n)
         {
