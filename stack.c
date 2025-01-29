@@ -73,6 +73,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <errno.h>
 
 /*****************************************************/
 
@@ -170,7 +171,7 @@ void create_stack(void** id_of_stack, uint64_t size_of_datatype, uint64_t elemen
         (*id_of_stack) = malloc(1*sizeof(struct stack));                       
         if(NULL == *id_of_stack)
         {
-                fprintf(stderr, "Memory allocation failed\n");
+                perror("Memory allocation failed");
                 return ;
         }
 
@@ -186,7 +187,8 @@ void create_stack(void** id_of_stack, uint64_t size_of_datatype, uint64_t elemen
         ((struct stack*)(*id_of_stack))->stack_data = (void*) malloc(((struct stack*)(*id_of_stack))->stack_size_allocated*((struct stack*)(*id_of_stack))->datatype_size);     
         if(NULL == ((struct stack*)(*id_of_stack))->stack_data)
         {
-                fprintf(stderr, "Memory allocation failed\n");
+                perror("Memory allocation failed");
+                return ;
         }
         
 
@@ -299,9 +301,10 @@ void stack_pop(void* id_of_stack)
 void stack_push(void* id_of_stack, void* data_to_push)
 {
         /* LOCAL VARIABLES:
-        *  Variable     Type    Description
-        *  --------     ----    -----------
-        *  stack_aux    void*   auxiliary pointer for the realloc operation
+        *  Variable     Type            Description
+        *  --------     ----            -----------
+        *  stack_aux    void*           auxiliary pointer for the realloc operation
+        *  k_aux        uint64_t        auxiliary to the realloc operation when it fails
         */
         if(NULL == id_of_stack)
         {
@@ -319,13 +322,31 @@ void stack_push(void* id_of_stack, void* data_to_push)
         if(((struct stack*)id_of_stack)->stack_size > ((struct stack*)id_of_stack)->stack_size_allocated)
         {
                 // tries to allocate double the size of the current stack;
-                void* stack_aux = realloc(((struct stack*)id_of_stack)->stack_data, (((struct stack*)id_of_stack)->stack_size_allocated + ((struct stack*)id_of_stack)->stack_size_allocated)*((struct stack*)id_of_stack)->datatype_size); 
-                if(NULL == stack_aux)
+                uint64_t k_aux = 1;
+                void* stack_aux = realloc(((struct stack*)id_of_stack)->stack_data, (((struct stack*)id_of_stack)->stack_size_allocated + ((struct stack*)id_of_stack)->stack_size_allocated)*((struct stack*)id_of_stack)->datatype_size);                 
+                if(NULL != stack_aux)                   // this is not needed, and could be placed after the while, however the shift left is a bit faster than the addition
                 {
-                        fprintf(stderr, "Memory allocation failed\n");
+                        ((struct stack*)id_of_stack)->stack_data = stack_aux;
+                        ((struct stack*)id_of_stack)->stack_size_allocated <<= 1;                        
                 }
-                ((struct stack*)id_of_stack)->stack_data = stack_aux;
-                ((struct stack*)id_of_stack)->stack_size_allocated <<= 1;
+                else
+                {
+                        while (NULL == stack_aux)
+                        {
+                                perror("Memory reallocation failed");
+                                printf("Attempting smaller reallocation\n");
+                                void* stack_aux = realloc(((struct stack*)id_of_stack)->stack_data, (((struct stack*)id_of_stack)->stack_size_allocated + (((struct stack*)id_of_stack)->stack_size_allocated / k_aux))*((struct stack*)id_of_stack)->datatype_size); 
+                                if(0 == (((struct stack*)id_of_stack)->stack_size_allocated/k_aux))
+                                {
+                                        perror("Impossible to reallocate stack");
+                                        return ;
+                                }
+
+                        }
+                        ((struct stack*)id_of_stack)->stack_data = stack_aux;
+                        ((struct stack*)id_of_stack)->stack_size_allocated += (((struct stack*)id_of_stack)->stack_size_allocated/k_aux);          
+
+                }
         }
 
         memcpy(check_stack_top(id_of_stack), data_to_push, ((struct stack*)id_of_stack)->datatype_size);

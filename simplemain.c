@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <errno.h>
 
 void single_stack_simple_test()
 {
@@ -186,8 +187,10 @@ void stack_stress_test3()
         uint64_t num_of_stacks = 20000;
         stacks = (void **) malloc(num_of_stacks* sizeof(void *));
         if(stacks == NULL)
+        {
+                perror("");
                 return ;
-
+        }
         uint16_t data1=20;
 
         for(uint64_t i=0;i<num_of_stacks;i++)
