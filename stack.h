@@ -68,7 +68,7 @@ extern "C" {
 *
 * FUNCTION NAME: create_stack       
 *
-*
+* PURPOSE: Allocates the needed memory for the stack wanted
 *
 * ARGUMENTS:
 *
@@ -90,7 +90,7 @@ void create_stack(void** id_of_stack, uint64_t size_of_datatype, uint64_t elemen
 *
 * FUNCTION NAME: check_stack_top       
 *
-*
+* PURPOSE: Returns the memory position of the element that is currently on the top of the stack
 *
 * ARGUMENTS:
 *
@@ -111,7 +111,7 @@ void* check_stack_top(void* id_of_stack);
 *
 * FUNCTION NAME: stack_pop       
 *
-*
+* PURPOSE: Removes one position from the top of the stack
 *
 * ARGUMENTS:
 *
@@ -132,7 +132,7 @@ void stack_pop(void* id_of_stack);
 *
 * FUNCTION NAME: stack_push        
 *
-*
+* PURPOSE: Pushes an element to the top of the stack
 *
 * ARGUMENTS:
 *
@@ -154,7 +154,7 @@ void stack_push(void* id_of_stack, void* data_to_push);
 *
 * FUNCTION NAME: check_stack_is_empty
 *
-*
+* PURPOSE: Checks if the stack is empty or not
 *
 * ARGUMENTS:
 *
@@ -175,7 +175,7 @@ uint8_t check_stack_is_empty(void* id_of_stack);
 *
 * FUNCTION NAME: check_stack_size
 *
-*
+* PURPOSE: Will return the current element count in the stack
 *
 * ARGUMENTS:
 *
@@ -196,7 +196,7 @@ uint64_t check_stack_size(void* id_of_stack);
 *
 * FUNCTION NAME: free_stack
 *
-*
+* PURPOSE: Frees the memory allocated for the stack
 *
 * ARGUMENTS:
 *
