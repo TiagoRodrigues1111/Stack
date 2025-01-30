@@ -34,12 +34,12 @@ To compile and run the program, you need:
 
    ### 2.1 Using `stack.c` (Array-based implementation):
    ```bash
-   gcc stack.c main.c -o stack
+   gcc stack.c simplemain.c -o stack
    ```
 
    ### 2.2 Using `stack_ll.c` (Linked list-based implementation):
    ```bash
-   gcc stack_ll.c main.c -o stack
+   gcc stack_ll.c simplemain.c -o stack
    ```
 
 3. Run the executable:
@@ -65,7 +65,7 @@ To compile and run the program, you need:
 ├── stack.c         
 ├── stack_ll.c      
 ├── stack.h         
-├── main.c          
+├── simplemain.c          
 └── README.md       
 ```
 
