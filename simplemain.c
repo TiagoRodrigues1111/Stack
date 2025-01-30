@@ -277,8 +277,39 @@ void stack_stress_test4()
 }
 
 
+void tutorial()
+{
+        void *stack1 = NULL;
+        create_stack(&stack1, sizeof(uint16_t),5);                              // create a stack of 5 elements of uint16_t size
+
+        uint16_t data1 = 3;
+        stack_push(stack1,(void*) &data1);                                      // Push a value onto the stack
+        
+        data1 = 20;
+        stack_push(stack1,(void*) &data1);                                  // Push another value onto the stack
+
+        if(!check_stack_is_empty(stack1))                                       // Checks if stack is not empty 
+        {
+                printf("%u\n",*((uint16_t*)check_stack_top(stack1)));         // prints top of stack
+        }
+
+        stack_pop(stack1);                                                      // Pops a value from the stack
+
+        printf("%lu\n",check_stack_size(stack1));                               // prints size of the stack
+
+        free_stack(stack1);                                                     // frees the stack
+
+        return ;
+
+
+
+}
+
+
 int main()
 {
+        tutorial();
+
         // single_stack_simple_test();
         
         //single_stack_simple_test_2();
@@ -289,7 +320,7 @@ int main()
 
         // stack_stress_test3();
 
-        stack_stress_test4();
+        //stack_stress_test4();
 
         return 0;  
 }
