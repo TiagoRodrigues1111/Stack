@@ -157,7 +157,7 @@ struct stack
 *
 *
 *****************************************************************/
-void create_stack(void** id_of_stack, uint64_t size_of_datatype,uint64_t elements_to_allocate)
+void create_stack(void** id_of_stack, uint64_t size_of_datatype, uint64_t elements_to_allocate)
 {
         /* LOCAL VARIABLES:
         *  Variable        Type    Description
