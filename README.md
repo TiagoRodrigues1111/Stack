@@ -1,5 +1,5 @@
 
-![Unlicense License](https://img.shields.io/badge/license-Unlicense-blue.svg)
+[![Unlicense License](https://img.shields.io/badge/license-Unlicense-blue.svg)](LICENSE)
 
  
 # Stack Implementation in C
