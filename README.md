@@ -32,20 +32,31 @@ To compile and run the program, you need:
 
 2. Compile the code using one of the following options:
 
-   ### 2.1 Using `stack.c` (Array-based implementation):
+   #### 2.1 Using `stack.c` (Array-based implementation):
    ```bash
    gcc stack.c simplemain.c -o stack
    ```
 
-   ### 2.2 Using `stack_ll.c` (Linked list-based implementation):
+   #### 2.2 Using `stack_ll.c` (Linked list-based implementation):
    ```bash
    gcc stack_ll.c simplemain.c -o stack
    ```
+   #### 2.3 Using `MakeFile`:
+   ```bash
+   make all/stack_test    # uses stack.c 
+   make stack_ll          # uses stack_ll.c
+   ```   
 
 3. Run the executable:
+  #### 3.1 Without make:
    ```bash
    ./stack
    ```
+  #### 3.2 With make:
+   ```bash
+    make run
+   ```
+
 
 ## Repo Structure
 
@@ -56,6 +67,7 @@ To compile and run the program, you need:
 - [stack.h](stack.h): Header file with function declarations and definitions
 - [simplemain.c](simplemain.c): Example usage of the stack
 - [README.md](README.md): Documentation for the project
+- [Makefile](Makefile): Simple Makefile 
 
 
 ### Folder  Structure
@@ -66,7 +78,8 @@ To compile and run the program, you need:
 ├── stack_ll.c      
 ├── stack.h         
 ├── simplemain.c          
-└── README.md       
+├── README.md
+└── Makefile         
 ```
 
 ## Operations Breakdown
@@ -152,11 +165,11 @@ int main()
         stack_push(stack1,(void*) &data1);                                      // Push a value onto the stack
         
         data1 = 20;
-        stack_push(stack1,(void*) &data1);                                  // Push another value onto the stack
+        stack_push(stack1,(void*) &data1);                                      // Push another value onto the stack
 
         if(!check_stack_is_empty(stack1))                                       // Checks if stack is not empty 
         {
-                printf("%u\n",*((uint16_t*)check_stack_top(stack1)));         // prints top of stack
+                printf("%u\n",*((uint16_t*)check_stack_top(stack1)));           // prints top of stack
         }
 
         stack_pop(stack1);                                                      // Pops a value from the stack
