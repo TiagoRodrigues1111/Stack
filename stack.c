@@ -330,7 +330,6 @@ void stack_push(void* id_of_stack, void* data_to_push)
                         stack_aux = realloc(((struct stack*)id_of_stack)->stack_data, (((struct stack*)id_of_stack)->stack_size_allocated + ((struct stack*)id_of_stack)->stack_size_allocated)*((struct stack*)id_of_stack)->datatype_size);                 
                         if(NULL != stack_aux)                   // this is not needed, and could be placed after the while, however the shift left is a bit faster than the addition
                         {
-                                ((struct stack*)id_of_stack)->stack_data = stack_aux;
                                 ((struct stack*)id_of_stack)->stack_size_allocated <<= 1;                        
                         }
                 }
@@ -350,10 +349,12 @@ void stack_push(void* id_of_stack, void* data_to_push)
                                 }
                                 stack_aux = realloc(((struct stack*)id_of_stack)->stack_data, (((struct stack*)id_of_stack)->stack_size_allocated + (((struct stack*)id_of_stack)->stack_size_allocated / (((struct stack*)id_of_stack)->k_aux)))*((struct stack*)id_of_stack)->datatype_size);
                         }
-                        ((struct stack*)id_of_stack)->stack_data = stack_aux;
+
                         ((struct stack*)id_of_stack)->stack_size_allocated += (((struct stack*)id_of_stack)->stack_size_allocated/(((struct stack*)id_of_stack)->k_aux));          
 
                 }
+                
+                ((struct stack*)id_of_stack)->stack_data = stack_aux;
         }
 
         memcpy(check_stack_top(id_of_stack), data_to_push, ((struct stack*)id_of_stack)->datatype_size);
