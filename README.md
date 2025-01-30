@@ -1,3 +1,7 @@
+
+![Unlicense License](https://img.shields.io/badge/license-Unlicense-blue.svg)
+
+ 
 # Stack Implementation in C
 
 This repository contains a simple implementation of a stack data structure in the C programming language. The stack follows the Last In, First Out (LIFO) principle, and the implementation supports common stack operations such as push, pop, peek/top, and check for emptiness as well as the  current size of the stack.
