@@ -1,6 +1,6 @@
 
 
-[![GitHub release (latest by date)](https://img.shields.io/github/v/release/TiagoRodrigues1111/stack?color=orange)](https://img.shields.io/github/v/release/TiagoRodrigues1111/stack)
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/TiagoRodrigues1111/stack?color=orange)](https://github.com/TiagoRodrigues1111/stack/releases)
 [![Unlicense License](https://img.shields.io/badge/license-Unlicense-blue.svg)](LICENSE)
 
  
