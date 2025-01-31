@@ -45,7 +45,9 @@
 * ----------    ---------------         ---------       -------          stack data as a linked list      
 * 23-01-2025    Tiago Rodrigues                               1         Updated create_stack function, and added 
 * ----------    ---------------         ---------       -------          a few good C practices
-*                                                                                                               
+* 31-01-2025    Tiago Rodrigues                           1.0.1         Added better error handling 
+*
+*                                                                                                              
 * ALGORITHM (PDL)
 *    
 *
@@ -175,30 +177,15 @@ void create_stack(void** id_of_stack, uint64_t size_of_datatype, uint64_t elemen
         (*id_of_stack) = malloc(1*sizeof(struct stack));                       
         if(NULL == *id_of_stack)
         {
-                fprintf(stderr, "Memory allocation failed\n");
+                perror("Memory allocation failed");
+                return ;
         }
 
         ((struct stack*)(*id_of_stack))->stack_size = 0;
         ((struct stack*)(*id_of_stack))->datatype_size = size_of_datatype;
         ((struct stack*)(*id_of_stack))->stack_data = NULL;
 
-        // Allocate space in the stack for the array of values
-        /*
-        ((struct stack*)(*id_of_stack))->stack_data = (struct data*) malloc(1*sizeof(struct data));     
-        if(((struct stack*)(*id_of_stack))->stack_data == NULL)
-        {
-                fprintf(stderr, "Memory allocation failed\n");
-        }
-        */
 
-        /*
-        ((struct stack*)(*id_of_stack))->stack_data->data_element = (void*) malloc(1*size_of_datatype);
-        if(((struct stack*)(*id_of_stack))->stack_data->data_element == NULL)
-        {
-                fprintf(stderr, "Memory allocation failed\n");
-        }
-        */
-        
         return ;        
 }
 
@@ -238,9 +225,7 @@ void* check_stack_top(void* id_of_stack)
                
 
         if(check_stack_is_empty(id_of_stack))
-        {
                 return NULL;
-        }
         
 
 
@@ -344,14 +329,16 @@ void stack_push(void* id_of_stack, void* data_to_push)
         struct data *aux_data_ptr = (struct data*) malloc(1*sizeof(struct data));   
         if(NULL == aux_data_ptr)
         {
-                fprintf(stderr, "Memory allocation failed\n");
+                perror("Memory allocation failed");
+                return ;
         }
 
         
         aux_data_ptr->data_element = (void*) malloc(1*((struct stack*)id_of_stack)->datatype_size);
         if(NULL == aux_data_ptr->data_element)
         {
-                fprintf(stderr, "Memory allocation failed\n");
+                perror("Memory allocation failed");
+                return;
         }
 
         memcpy(aux_data_ptr->data_element, data_to_push, ((struct stack*)id_of_stack)->datatype_size);

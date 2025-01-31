@@ -8,15 +8,15 @@
 * Name                          I/O                     Description                                             
 * ----                          ---                     -----------                                             
 * none     
-                                                                                                          
+
 * EXTERNAL VARIABLES:                                                                                           
-*                                                                                        
-*                                                                                                               
+*
+*
 * Name          Type            I/O                     Description                                             
 * ----          ----            ---                     -----------                                             
 * none
 *
-*                                                                                                             
+*
 * EXTERNAL REFERENCES:                                                                                          
 * Name                          Description                                                                     
 * ----                          -----------
@@ -24,32 +24,35 @@
 * realloc                       reallocates memory space                                                        https://man7.org/linux/man-pages/man3/realloc.3p.html
 * memcpy                        copies x number of bytes from one memory position to another memory position    https://man7.org/linux/man-pages/man3/memcpy.3.html
 * fprintf                       writes formatted data to a stream                                               https://man7.org/linux/man-pages/man3/fprintf.3p.html
-*   
+*
 * ABNORMAL TERMINATION CONDITIONS, ERROR AND WARNING MESSAGES:
-*             
-*                                                                                                  
+*
+*
 * ASSUMPTIONS, CONSTRAINTS, RESTRICTIONS:
 *  It is assumed that the stack will never have more than 2^64 elements.                               
 *  It is assumed that the user will grab only 1 element size from the memory position returned from check_stack_top 
-*                                                                                                               
+*
+*
 * NOTES:                                                                                                        
-*                                 
-*                                       
+*
+*
 * REQUIREMENTS/FUNCTIONAL SPECIFICATIONS REFERENCES:                                                            
 *
-*                                                                                                               
+*
 * DEVELOPMENT HISTORY:                                                                                          
-*                                                                                                               
+*
 * Date          Author                  Change Id       Release         Description Of Change                   
 * ----------    ---------------         ---------       -------         ---------------------   
-* 14-01-2025    Tiago Rodrigues                               1         File preparation     
-* 17-01-2025    Tiago Rodrigues                               1         Initial Implementation of stack, for uint8_t   
-* 20-01-2025    Tiago Rodrigues                               1         Changed operations to use memcpy   
-* 21-01-2025    Tiago Rodrigues                               1         Changed some operations for edge cases, 
+* 14-01-2025    Tiago Rodrigues                               0         File preparation     
+* 17-01-2025    Tiago Rodrigues                               0         Initial Implementation of stack, for uint8_t   
+* 20-01-2025    Tiago Rodrigues                               0         Changed operations to use memcpy   
+* 21-01-2025    Tiago Rodrigues                               0         Changed some operations for edge cases, 
 * ----------    ---------------         ---------       -------          and commmented function preambles
-* 23-01-2025    Tiago Rodrigues                               1         Updated create_stack function, and added 
+* 23-01-2025    Tiago Rodrigues                               0         Updated create_stack function, and added 
 * ----------    ---------------         ---------       -------          a few good C practices
-*                                                                                                               
+* 31-01-2025    Tiago Rodrigues                           1.0.1         Added better error handling
+*
+*
 * ALGORITHM (PDL)
 *    
 *
