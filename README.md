@@ -12,7 +12,7 @@ This repository contains a simple implementation of a stack data structure in th
 - Basic operations:
   - `Create`: Creates the stack datastructure.  - `create_stack`
   - `Push`: Add an element to the top of the stack. - `stack_push`
-  - `Pop`: Remove and return the top element of the stack. - `stack_pop`
+  - `Pop`: Remove the top element of the stack. - `stack_pop`
   - `Peek/Top`: View the top element without removing it. - `check_stack_top`
   - `IsEmpty`: Check if the stack is empty. - `check_stack_is_empty`
   - `Size`: Get the current size of the stack. - `check_stack_size`
