@@ -185,6 +185,12 @@ int main()
         return 0;
 }
 ```
+## Notes
+uint64_t is the size of the stack, therefore comparisons of size must be to zero (unlike other implementations which might use size = -1 to initialize stack). 
+
+It is assumed that the stack will never have more than 2^64 elements.
+
+It is assumed that the user will grab only 1 element size from the memory position returned from check_stack_top.
 
 ## Contributions
 
