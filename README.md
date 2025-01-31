@@ -89,7 +89,7 @@ To compile and run the program, you need:
 ## Operations Breakdown
 
 ### `Create`
-- **Description**: Creates th stack datastructure
+- **Description**: Creates the stack datastructure
 - **Input**: The pointer to the memory position of the stack, the datatype size, and number of elements to allocate.
 - **Example**:
   ```c
@@ -143,7 +143,7 @@ To compile and run the program, you need:
   ```
 
 ### `Free`
-- **Description**: Frees the stack datastructur.
+- **Description**: Frees the stack datastructure.
 - **Output**: None.
 - **Example**:
   ```c
@@ -171,7 +171,7 @@ int main()
         data1 = 20;
         stack_push(stack1,(void*) &data1);                                      // Push another value onto the stack
 
-        if(!check_stack_is_empty(stack1))                                       // Checks if stack is not empty 
+        if(!check_stack_is_empty(stack1))                                       // Checks if stack is not empty
         {
                 printf("%u\n",*((uint16_t*)check_stack_top(stack1)));           // prints top of stack
         }
