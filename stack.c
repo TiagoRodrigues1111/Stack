@@ -321,6 +321,13 @@ void stack_push(void* id_of_stack, void* data_to_push)
                 fprintf(stderr, "Stack full, can't add more elements\n");
                 return ;
         }
+        if(NULL == data_to_push)
+        {
+                fprintf(stderr, "Data pointer is null\n");
+                return ;
+        }
+
+
 
         ((struct stack*)id_of_stack)->stack_size++;
         // reallocate memory if num of elements in stack becomes larger than the max num of elements allocated for the stack 
